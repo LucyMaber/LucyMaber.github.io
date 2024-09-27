@@ -22,24 +22,23 @@
 
     document.getElementById('loginButton').addEventListener('click', function() {
       // Step 1: Redirect to GitHub OAuth authorization URL
-      const clientId = 'Ov23li9OCgYHuEqr0f00'; // Replace with your GitHub Client ID
+      const clientId = ' Ov23li9OCgYHuEqr0f00 '; // Replace with your GitHub Client ID
       const scope = 'repo';
-      const redirectUri = encodeURIComponent(window.location.href);
+      const redirectUri = encodeURIComponent(window.location.origin + '/callback');
       const oauthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&scope=${scope}&redirect_uri=${redirectUri}`;
       window.location.href = oauthUrl;
     });
 
-    // Step 2: Handle the redirect and get access token (Device Flow)
-    if (window.location.search.includes('code=')) {
+    // Step 2: Handle the redirect after successful login
+    if (window.location.pathname === '/callback') {
       const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get('code');
-
-      // Step 3: Exchange the authorization code for an access token
-      fetch(`https://github.com/login/oauth/access_token?client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&code=${code}`, {
+      
+      // Step 3: Send the code to your server to exchange for an access token
+      fetch('/exchange_token', {
         method: 'POST',
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code })
       })
       .then(response => response.json())
       .then(data => {
@@ -89,4 +88,3 @@
   </script>
 </body>
 </html>
-
