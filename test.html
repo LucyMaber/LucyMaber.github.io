@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub OAuth File Upload</title>
+</head>
+<body>
+  <h1>Upload File to GitHub with OAuth</h1>
+  <form id="uploadForm">
+    <button type="button" id="loginButton">Login with GitHub</button>
+    <br><br>
+    <label for="fileInput">Select a file to upload:</label>
+    <input type="file" id="fileInput" name="file" required>
+    <br><br>
+    <button type="submit">Upload File</button>
+  </form>
+  <div id="result"></div>
+
+  <script type="module">
+    let accessToken = '';
+
+    document.getElementById('loginButton').addEventListener('click', function() {
+      // Step 1: Redirect to GitHub OAuth authorization URL
+      const clientId = 'YOUR_CLIENT_ID'; // Replace with your GitHub Client ID
+      const scope = 'repo';
+      const redirectUri = encodeURIComponent(window.location.href);
+      const oauthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&scope=${scope}&redirect_uri=${redirectUri}`;
+      window.location.href = oauthUrl;
+    });
+
+    // Step 2: Handle the redirect and get access token (Device Flow)
+    if (window.location.search.includes('code=')) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+
+      // Step 3: Exchange the authorization code for an access token
+      fetch(`https://github.com/login/oauth/access_token?client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&code=${code}`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        accessToken = data.access_token;
+        document.getElementById('result').textContent = 'Logged in successfully!';
+      });
+    }
+
+    document.getElementById('uploadForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const fileInput = document.getElementById('fileInput');
+      const file = fileInput.files[0];
+
+      if (!accessToken) {
+        alert('Please log in with GitHub first!');
+        return;
+      }
+
+      if (file) {
+        const base64Content = await file.text().then(text => btoa(text));
+
+        // Step 4: Upload file to GitHub repository
+        const repoName = 'YOUR_REPO_NAME'; // Replace with your GitHub repository name
+        const filePath = `uploads/${file.name}`;
+        const uploadUrl = `https://api.github.com/repos/YOUR_USERNAME/${repoName}/contents/${filePath}`;
+        
+        fetch(uploadUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Accept': 'application/vnd.github.v3+json',
+          },
+          body: JSON.stringify({
+            message: `Upload ${file.name}`,
+            content: base64Content,
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('result').textContent = `File uploaded: ${file.name}`;
+        })
+        .catch(error => {
+          document.getElementById('result').textContent = `Error uploading file: ${error}`;
+        });
+      }
+    });
+  </script>
+</body>
+</html>
