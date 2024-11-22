@@ -3,7 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 
-const BodyPage = ({ children, title = "Pirate Party UK", description = "", header = null }) => {
+const BodyPage = ({ children, title = "Lucy Maber", description = "", header = null }) => {
   return (
     <html lang="en">
       <head>
