@@ -1,0 +1,11 @@
+[submodule "rules"]
+    path = rules
+    url = https://github.com/pirate-party-uk/rules.git
+
+[submodule "policy"]
+    path = policy
+    url = https://github.com/pirate-party-uk/policy.git
+
+[submodule "articles"]
+    path = etc/articles
+    url = https://github.com/pirate-party-uk/articles.git

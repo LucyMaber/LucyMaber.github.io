@@ -1,0 +1,11 @@
+node_modules
+data/session.json
+data/Firestore.json
+data/session.json
+data/session.json
+data/*
+temp/**
+data/emailVerification.json
+package-lock.json
+public_br/**
+public_gzip/**
