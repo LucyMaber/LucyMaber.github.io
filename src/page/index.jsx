@@ -51,15 +51,25 @@ function App() {
                 </li>
                 <li>
                   <strong>TransMedia Watch Media Project:</strong> Coordinating
-                  a media tracking project from 2012 onwards, involving web
-                  scraping for trans-related news, ensuring data integrity and
-                  accessibility for research purposes.
+                  a media tracking project from 2014 onwards, involving web
+                  scraping for trans-related news. Ensuring data integrity and
+                  accessibility for research purposes, this project supports
+                  advocacy and community outreach efforts.
                 </li>
                 <li>
-                  <strong>BBC Complaints Data Analysis:</strong> Analyzing
-                  historical BBC complaints data for trends related to trans
-                  issues, incorporating natural language processing and
-                  sentiment analysis.
+                  <strong>Wikidata Custom Tokenizer:</strong> Developing a
+                  custom tokenizer for language models using advanced entity
+                  linking with Wikidata. This initiative includes classification
+                  tasks and fine-tuning large language autoregressive models
+                  (LLARMs) to improve natural language processing and
+                  information extraction capabilities.
+                </li>
+                <li>
+                  <strong>Wikidata and Shmaigay Eye:</strong> Creating a tool to
+                  identify transphobic individuals and organizations on social
+                  media platforms. This information is utilized in the
+                  TransMedia Watch Media Project and helps TACC combat
+                  transphobia while fostering community outreach and support.
                 </li>
               </ul>
             </Card.Text>
