@@ -119,14 +119,6 @@ function App() {
             <Card.Title>Connect with Me</Card.Title>
             <Card.Text>
               <Button
-                variant="primary"
-                href="https://discord.gg/yourlink"
-                target="_blank"
-                aria-label="Connect on Discord"
-              >
-                <Discord /> Discord
-              </Button>{" "}
-              <Button
                 variant="dark"
                 href="https://github.com/LucyMaber"
                 target="_blank"
@@ -144,20 +136,20 @@ function App() {
               </Button>{" "}
               <Button
                 variant="info"
-                href="https://www.tagcollective.org"
+                href="https://www.tacc.org.uk/"
                 target="_blank"
-                aria-label="Visit TAGG website"
+                aria-label="Visit TACC website"
               >
-                <Globe /> TAGG
+                <Globe /> TACC
               </Button>
-              <Button
+              {/* <Button
                 variant="info"
                 href="https://www.tagcollective.org"
                 target="_blank"
                 aria-label="Visit Collaboration of Independent Pirates website"
               >
                 <Globe /> Collaboration of Independent Pirates
-              </Button>
+              </Button> */}
             </Card.Text>
           </Card.Body>
         </Card>
