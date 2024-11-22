@@ -5,7 +5,7 @@ import { Discord, Linkedin, Github, Globe } from "react-bootstrap-icons";
 
 function App() {
   return (
-    <BodyPage title="Home" description="Welcome to the Pirate Party UK">
+    <BodyPage title="Home" description="Welcome to the Lucy Maber">
       <Container className="pb-5 mb-5">
         <div className="p-5 text-center bg-body-tertiary rounded-3">
           <h1 className="text-body-emphasis">Lucy Maber</h1>
