@@ -36,6 +36,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist  # Directory containing the build output
+          publish_dir: ./output  # Directory containing the build output
           external_repository: Collaboration-of-International-Pirates/Collaboration-of-International-Pirates.github.io
           publish_branch: main  # Branch to deploy to in the GitHub Pages repo
