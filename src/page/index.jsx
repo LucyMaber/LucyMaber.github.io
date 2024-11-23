@@ -5,16 +5,16 @@ import { Linkedin, Github, Globe } from "react-bootstrap-icons";
 
 function App() {
   return (
-    <BodyPage title="Home" description="Welcome to Lucy Maber's Website">
+    <BodyPage title="Home" description="Welcome to Lucy Maber's Portfolio">
       <Container className="pb-5 mb-5">
         {/* Hero Section */}
         <div className="p-5 text-center bg-body-tertiary rounded-3">
           <h1 className="text-body-emphasis">Lucy Maber</h1>
           <p className="col-lg-8 mx-auto fs-5 text-muted">
-            Lead developer, activist, and advocate for digital rights and social
-            justice. Balancing roles in web development and leadership within
-            TAGG and Pirate Party UK, while supporting independent advocacy
-            projects.
+            Experienced web developer and technology enthusiast with a passion
+            for creating innovative solutions. Skilled in React, Python, and
+            natural language processing with a focus on building scalable and
+            accessible web applications.
           </p>
           <Button
             variant="primary"
@@ -37,15 +37,8 @@ function App() {
               border: "none",
             }}
           >
-            ❤️ Support Me on Ko-fi
+            ❤️ Support My Projects
           </Button>
-          <p className="mt-3 text-muted small">
-            <strong>Transparency Notice:</strong> Donations through Ko-fi are
-            used exclusively for independent advocacy, technology projects, and
-            personal living expenses (e.g., keeping a roof over my head). These
-            funds are entirely separate from activities with Pirate Party UK or
-            TAGG.
-          </p>
         </div>
 
         {/* About Me Section */}
@@ -53,10 +46,10 @@ function App() {
           <Card.Body>
             <Card.Title>About Me</Card.Title>
             <Card.Text>
-              I am a dedicated advocate for human rights, with a strong focus on
-              trans advocacy and digital freedom. As the leader of Pirate Party
-              UK and a web developer for TAGG, I am passionate about advancing
-              policies that promote transparency, inclusion, and innovation.
+              I am a seasoned developer with expertise in web technologies and
+              project management. I enjoy working on projects that bridge
+              technology and innovation, delivering impactful solutions for
+              clients and organizations.
             </Card.Text>
           </Card.Body>
         </Card>
@@ -67,18 +60,15 @@ function App() {
             <Card.Title>Skills</Card.Title>
             <Card.Text>
               <ul>
-                <li>JavaScript, React, and Python expertise</li>
+                <li>Proficient in JavaScript, React, and Python</li>
+                <li>Experienced in web scraping and data processing pipelines</li>
                 <li>
-                  Experience in building and managing web scraping pipelines for
-                  research and advocacy
+                  Skilled in building NLP models for classification and
+                  information extraction
                 </li>
                 <li>
-                  Proficient in natural language processing and AI for text
-                  classification
-                </li>
-                <li>
-                  Strong leadership in human rights and privacy-focused
-                  initiatives
+                  Adept at managing and leading teams to deliver high-quality
+                  results
                 </li>
               </ul>
             </Card.Text>
@@ -92,17 +82,20 @@ function App() {
             <Card.Text>
               <ul>
                 <li>
-                  <strong>Pirate Party UK Initiatives:</strong> Spearheading
-                  policy discussions on intellectual property and digital
-                  rights.
+                  <strong>TACC Web Development:</strong> Led the development and
+                  management of the Trans Advocacy and Complaint Collective
+                  website, ensuring accessibility and community engagement.
                 </li>
                 <li>
-                  <strong>TransMedia Watch Media Project:</strong> Managing
-                  media tracking for trans representation since 2014.
+                  <strong>Web Scraping Pipelines:</strong> Developed data
+                  collection tools to track trends and insights for advocacy and
+                  research purposes.
                 </li>
                 <li>
-                  <strong>Independent Technology Projects:</strong> Developing
-                  tools for better privacy and accessibility on the web.
+                  <strong>Collaboration of Independent Pirates Website:</strong>{" "}
+                  Managed and maintained the online presence for an
+                  international organization focusing on digital rights and
+                  intellectual property reform.
                 </li>
               </ul>
             </Card.Text>
@@ -121,16 +114,16 @@ function App() {
                     alt="Project 1 Screenshot"
                   />
                   <Card.Body>
-                    <Card.Title>Pirate Party UK Initiatives</Card.Title>
+                    <Card.Title>Web Development Projects</Card.Title>
                     <Card.Text>
-                      Driving policies on digital rights, IP reform, and
-                      grassroots environmental justice campaigns.
+                      Delivering robust web solutions with React, Bootstrap, and
+                      Python-based backends.
                     </Card.Text>
                     <Button
                       variant="secondary"
-                      href="https://ukpirate.party/"
+                      href="#"
                       target="_blank"
-                      aria-label="Learn more about Pirate Party UK Initiatives"
+                      aria-label="Learn more about web development projects"
                     >
                       Learn More
                     </Button>
@@ -145,16 +138,16 @@ function App() {
                     alt="Project 2 Screenshot"
                   />
                   <Card.Body>
-                    <Card.Title>Independent Advocacy Projects</Card.Title>
+                    <Card.Title>Data Analysis Tools</Card.Title>
                     <Card.Text>
-                      Using technology and community engagement to advance
-                      social justice causes beyond political boundaries.
+                      Built tools for data extraction and analysis to support
+                      informed decision-making.
                     </Card.Text>
                     <Button
                       variant="secondary"
-                      href="https://ko-fi.com/LucyMaber"
+                      href="#"
                       target="_blank"
-                      aria-label="Support my independent advocacy projects"
+                      aria-label="Learn more about data analysis tools"
                     >
                       Learn More
                     </Button>
@@ -168,33 +161,23 @@ function App() {
         {/* Call-to-Action Section */}
         <Card className="mb-3" id="connect">
           <Card.Body className="text-center">
-            <h3>Interested in collaborating?</h3>
+            <h3>Interested in working together?</h3>
             <p>
-              Let's work together on creating a more equitable, transparent, and
-              privacy-focused future. Whether you're an organization, developer,
-              or advocate, feel free to reach out!
+              I am always open to new opportunities and collaborations. Let’s
+              create impactful solutions together.
             </p>
             <Button
               variant="info"
-              href="https://www.tacc.org.uk/"
-              target="_blank"
-              aria-label="Visit TACC website"
+              href="#"
+              aria-label="View Portfolio"
             >
-              <Globe /> Visit TACC
-            </Button>
-            <Button
-              variant="info"
-              href="https://ukpirate.party/"
-              target="_blank"
-              aria-label="Visit Pirate Party UK website"
-            >
-              <Globe /> Visit Pirate Party UK
+              View Portfolio
             </Button>
             <Button
               variant="dark"
               href="https://github.com/LucyMaber"
               target="_blank"
-              aria-label="Visit Lucy Maber's GitHub profile"
+              aria-label="Visit GitHub profile"
             >
               <Github /> GitHub
             </Button>
