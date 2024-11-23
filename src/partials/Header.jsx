@@ -14,6 +14,7 @@ const Header = () => {
         <Navbar.Collapse id="navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/" onClick={() => setExpanded(false)}>Home</Nav.Link>
+            <Nav.Link href="/CVPage.html" onClick={() => setExpanded(false)}>VC</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

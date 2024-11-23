@@ -1,12 +1,13 @@
 import React from "react";
-import { Container, Card, Button } from "react-bootstrap";
-import BodyPage from "../partials/BodyPage";
-import { Discord, Linkedin, Github, Globe } from "react-bootstrap-icons";
+import { Container, Card, Button, Row, Col } from "react-bootstrap";
+import BodyPage from "../partials/BodyPage"; // Ensure this is correctly exported
+import { Linkedin, Github, Globe } from "react-bootstrap-icons";
 
 function App() {
   return (
-    <BodyPage title="Home" description="Welcome to the Lucy Maber">
+    <BodyPage title="Home" description="Welcome to Lucy Maber's Website">
       <Container className="pb-5 mb-5">
+        {/* Hero Section */}
         <div className="p-5 text-center bg-body-tertiary rounded-3">
           <h1 className="text-body-emphasis">Lucy Maber</h1>
           <p className="col-lg-8 mx-auto fs-5 text-muted">
@@ -14,8 +15,32 @@ function App() {
             social advocacy. Currently managing the websites for TAGG and Pirate
             Party UK.
           </p>
+          <Button
+            variant="primary"
+            href="#connect"
+            aria-label="Contact Lucy Maber"
+            className="mt-3"
+          >
+            Get in Touch
+          </Button>{" "}
+          <Button
+            variant="warning"
+            href="https://ko-fi.com/LucyMaber"
+            target="_blank"
+            aria-label="Support me on Ko-fi"
+            className="mt-3"
+            style={{
+              marginLeft: "10px",
+              color: "#ffffff", // Ensure text color is readable
+              backgroundColor: "#FF5E5B", // Ko-fi brand red
+              border: "none", // Remove any borders for a cleaner look
+            }}
+          >
+            ❤️ Support Me on Ko-fi
+          </Button>
         </div>
 
+        {/* About Me Section */}
         <Card className="mb-3">
           <Card.Body>
             <Card.Title>About Me</Card.Title>
@@ -27,18 +52,27 @@ function App() {
           </Card.Body>
         </Card>
 
+        {/* Skills Section */}
         <Card className="mb-3">
           <Card.Body>
             <Card.Title>Skills</Card.Title>
             <Card.Text>
-              Proficient in: JavaScript, React, Python, and web scraping tools.
-              Strong background in machine learning models for NLP and text
-              classification. Passionate about human rights, particularly in
-              online and privacy domains.
+              <ul>
+                <li>Proficient in JavaScript, React, and Python</li>
+                <li>
+                  Skilled in web scraping and NLP tools for advocacy projects
+                </li>
+                <li>
+                  Expertise in machine learning for text classification and
+                  entity linking
+                </li>
+                <li>Strong focus on human rights and privacy domains</li>
+              </ul>
             </Card.Text>
           </Card.Body>
         </Card>
 
+        {/* Projects Section */}
         <Card className="mb-3">
           <Card.Body>
             <Card.Title>Projects</Card.Title>
@@ -52,105 +86,109 @@ function App() {
                 <li>
                   <strong>TransMedia Watch Media Project:</strong> Coordinating
                   a media tracking project from 2014 onwards, involving web
-                  scraping for trans-related news. Ensuring data integrity and
-                  accessibility for research purposes, this project supports
-                  advocacy and community outreach efforts.
+                  scraping for trans-related news.
                 </li>
                 <li>
                   <strong>Wikidata Custom Tokenizer:</strong> Developing a
                   custom tokenizer for language models using advanced entity
-                  linking with Wikidata. This initiative includes classification
-                  tasks and fine-tuning large language autoregressive models
-                  (LLARMs) to improve natural language processing and
-                  information extraction capabilities.
-                </li>
-                <li>
-                  <strong>Wikidata and Shmaigay Eye:</strong> Creating a tool to
-                  identify transphobic individuals and organizations on social
-                  media platforms. This information is utilized in the
-                  TransMedia Watch Media Project and helps TACC combat
-                  transphobia while fostering community outreach and support.
+                  linking with Wikidata.
                 </li>
               </ul>
             </Card.Text>
           </Card.Body>
         </Card>
 
+        {/* Portfolio Showcase */}
         <Card className="mb-3">
           <Card.Body>
-            <Card.Title>Organizations</Card.Title>
-            <Card.Text>
-              <ul>
-                <li>
-                  <strong>Pirate Party UK:</strong> Leading policy discussions
-                  on intellectual property, digital rights, and environmental
-                  justice.
-                </li>
-                <li>
-                  <strong>TACC and TMW Scraping:</strong> Web scraping for the
-                  Trans Advocacy and Complaint Collective and TransMedia Watch
-                  to track media representation and complaints related to trans
-                  issues.
-                </li>
-                <li>
-                  <strong>Website TACC:</strong> Overseeing the development and
-                  content management of the Trans Advocacy and Complaint
-                  Collective (TACC) website. This includes updating resources,
-                  ensuring accessibility, and supporting advocacy by providing
-                  timely information and tools for community engagement.
-                </li>
-                <li>
-                  <strong>Website Collaboration of Independent Pirates:</strong>
-                  Managing and developing the web presence for the Collaboration
-                  of Independent Pirates (CIP), focusing on digital rights,
-                  intellectual property reform, and policy advocacy.
-                  Responsibilities include maintaining website updates, ensuring
-                  user accessibility, and supporting international
-                  collaborations and discussions around pressing issues in
-                  digital freedom and human rights.
-                </li>
-              </ul>
-            </Card.Text>
+            {/* <Card.Title>Portfolio Showcase</Card.Title> */}
+            <Row>
+              <Col md={6}>
+                <Card className="mb-3">
+                  <Card.Img
+                    variant="top"
+                    src="https://via.placeholder.com/300x200"
+                    alt="Project 1 Screenshot"
+                  />
+                  <Card.Body>
+                    <Card.Title>Pirate Party UK Initiatives</Card.Title>
+                    <Card.Text>
+                      Leading policy discussions on intellectual property,
+                      digital rights, and environmental justice.
+                    </Card.Text>
+                    <Button
+                      variant="secondary"
+                      href="https://ukpirate.party/"
+                      target="_blank"
+                      aria-label="Learn more about Pirate Party UK Initiatives"
+                    >
+                      Learn More
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col md={6}>
+                <Card className="mb-3">
+                  <Card.Img
+                    variant="top"
+                    src="https://via.placeholder.com/300x200"
+                    alt="Project 2 Screenshot"
+                  />
+                  <Card.Body>
+                    <Card.Title>TransMedia Watch Media Project</Card.Title>
+                    <Card.Text>
+                      Coordinating a media tracking project to improve
+                      representation and data accessibility for research and
+                      advocacy purposes.
+                    </Card.Text>
+                    <Button
+                      variant="secondary"
+                      href="https://www.tacc.org.uk/"
+                      target="_blank"
+                      aria-label="Learn more about TransMedia Watch Media Project"
+                    >
+                      Learn More
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
           </Card.Body>
         </Card>
 
-        <Card className="mb-3">
-          <Card.Body>
-            <Card.Title>Connect with Me</Card.Title>
-            <Card.Text>
-              <Button
-                variant="dark"
-                href="https://github.com/LucyMaber"
-                target="_blank"
-                aria-label="View GitHub profile"
-              >
-                <Github /> GitHub
-              </Button>{" "}
-              <Button
-                variant="info"
-                href="https://ukpirate.party/"
-                target="_blank"
-                aria-label="Visit Pirate Party UK website"
-              >
-                <Globe /> Pirate Party UK
-              </Button>{" "}
-              <Button
-                variant="info"
-                href="https://www.tacc.org.uk/"
-                target="_blank"
-                aria-label="Visit TACC website"
-              >
-                <Globe /> TACC
-              </Button>
-              {/* <Button
-                variant="info"
-                href="https://www.tagcollective.org"
-                target="_blank"
-                aria-label="Visit Collaboration of Independent Pirates website"
-              >
-                <Globe /> Collaboration of Independent Pirates
-              </Button> */}
-            </Card.Text>
+        {/* Call-to-Action Section */}
+        <Card className="mb-3" id="connect">
+          <Card.Body className="text-center">
+            <h3>Interested in collaborating?</h3>
+            <p>
+              Whether you're an organization, developer, or advocate, I'd love
+              to connect and work on meaningful projects together. Feel free to
+              reach out!
+            </p>
+            <Button
+              variant="info"
+              href="https://www.tacc.org.uk/"
+              target="_blank"
+              aria-label="Visit TACC website"
+            >
+              <Globe /> Visit TACC
+            </Button>
+            <Button
+              variant="info"
+              href="https://ukpirate.party/"
+              target="_blank"
+              aria-label="Visit Pirate Party UK website"
+            >
+              <Globe /> Visit Pirate Party UK
+            </Button>
+            <Button
+              variant="dark"
+              href="https://github.com/LucyMaber"
+              target="_blank"
+              aria-label="Visit Lucy Maber's GitHub profile"
+            >
+              <Github /> GitHub
+            </Button>
           </Card.Body>
         </Card>
       </Container>
