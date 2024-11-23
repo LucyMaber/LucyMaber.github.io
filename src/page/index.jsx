@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Card, Button, Row, Col } from "react-bootstrap";
-import BodyPage from "../partials/BodyPage"; // Ensure this is correctly exported
+import BodyPage from "../partials/BodyPage";
 import { Linkedin, Github, Globe } from "react-bootstrap-icons";
 
 function App() {
@@ -11,9 +11,10 @@ function App() {
         <div className="p-5 text-center bg-body-tertiary rounded-3">
           <h1 className="text-body-emphasis">Lucy Maber</h1>
           <p className="col-lg-8 mx-auto fs-5 text-muted">
-            Lead developer and activist with a passion for digital rights and
-            social advocacy. Currently managing the websites for TAGG and Pirate
-            Party UK.
+            Lead developer, activist, and advocate for digital rights and social
+            justice. Balancing roles in web development and leadership within
+            TAGG and Pirate Party UK, while supporting independent advocacy
+            projects.
           </p>
           <Button
             variant="primary"
@@ -31,13 +32,20 @@ function App() {
             className="mt-3"
             style={{
               marginLeft: "10px",
-              color: "#ffffff", // Ensure text color is readable
-              backgroundColor: "#FF5E5B", // Ko-fi brand red
-              border: "none", // Remove any borders for a cleaner look
+              color: "#ffffff",
+              backgroundColor: "#FF5E5B",
+              border: "none",
             }}
           >
             ❤️ Support Me on Ko-fi
           </Button>
+          <p className="mt-3 text-muted small">
+            <strong>Transparency Notice:</strong> Donations through Ko-fi are
+            used exclusively for independent advocacy, technology projects, and
+            personal living expenses (e.g., keeping a roof over my head). These
+            funds are entirely separate from activities with Pirate Party UK or
+            TAGG.
+          </p>
         </div>
 
         {/* About Me Section */}
@@ -45,9 +53,10 @@ function App() {
           <Card.Body>
             <Card.Title>About Me</Card.Title>
             <Card.Text>
-              Experienced in trans advocacy, web development, and leadership
-              within the Pirate Party UK. Skilled in both front-end and back-end
-              technologies, with a strong focus on open-source contributions.
+              I am a dedicated advocate for human rights, with a strong focus on
+              trans advocacy and digital freedom. As the leader of Pirate Party
+              UK and a web developer for TAGG, I am passionate about advancing
+              policies that promote transparency, inclusion, and innovation.
             </Card.Text>
           </Card.Body>
         </Card>
@@ -58,15 +67,19 @@ function App() {
             <Card.Title>Skills</Card.Title>
             <Card.Text>
               <ul>
-                <li>Proficient in JavaScript, React, and Python</li>
+                <li>JavaScript, React, and Python expertise</li>
                 <li>
-                  Skilled in web scraping and NLP tools for advocacy projects
+                  Experience in building and managing web scraping pipelines for
+                  research and advocacy
                 </li>
                 <li>
-                  Expertise in machine learning for text classification and
-                  entity linking
+                  Proficient in natural language processing and AI for text
+                  classification
                 </li>
-                <li>Strong focus on human rights and privacy domains</li>
+                <li>
+                  Strong leadership in human rights and privacy-focused
+                  initiatives
+                </li>
               </ul>
             </Card.Text>
           </Card.Body>
@@ -79,19 +92,17 @@ function App() {
             <Card.Text>
               <ul>
                 <li>
-                  <strong>Pirate Party UK Initiatives:</strong> Leading policy
-                  discussions on intellectual property, digital rights, and
-                  environmental justice.
+                  <strong>Pirate Party UK Initiatives:</strong> Spearheading
+                  policy discussions on intellectual property and digital
+                  rights.
                 </li>
                 <li>
-                  <strong>TransMedia Watch Media Project:</strong> Coordinating
-                  a media tracking project from 2014 onwards, involving web
-                  scraping for trans-related news.
+                  <strong>TransMedia Watch Media Project:</strong> Managing
+                  media tracking for trans representation since 2014.
                 </li>
                 <li>
-                  <strong>Wikidata Custom Tokenizer:</strong> Developing a
-                  custom tokenizer for language models using advanced entity
-                  linking with Wikidata.
+                  <strong>Independent Technology Projects:</strong> Developing
+                  tools for better privacy and accessibility on the web.
                 </li>
               </ul>
             </Card.Text>
@@ -101,7 +112,6 @@ function App() {
         {/* Portfolio Showcase */}
         <Card className="mb-3">
           <Card.Body>
-            {/* <Card.Title>Portfolio Showcase</Card.Title> */}
             <Row>
               <Col md={6}>
                 <Card className="mb-3">
@@ -113,8 +123,8 @@ function App() {
                   <Card.Body>
                     <Card.Title>Pirate Party UK Initiatives</Card.Title>
                     <Card.Text>
-                      Leading policy discussions on intellectual property,
-                      digital rights, and environmental justice.
+                      Driving policies on digital rights, IP reform, and
+                      grassroots environmental justice campaigns.
                     </Card.Text>
                     <Button
                       variant="secondary"
@@ -135,17 +145,16 @@ function App() {
                     alt="Project 2 Screenshot"
                   />
                   <Card.Body>
-                    <Card.Title>TransMedia Watch Media Project</Card.Title>
+                    <Card.Title>Independent Advocacy Projects</Card.Title>
                     <Card.Text>
-                      Coordinating a media tracking project to improve
-                      representation and data accessibility for research and
-                      advocacy purposes.
+                      Using technology and community engagement to advance
+                      social justice causes beyond political boundaries.
                     </Card.Text>
                     <Button
                       variant="secondary"
-                      href="https://www.tacc.org.uk/"
+                      href="https://ko-fi.com/LucyMaber"
                       target="_blank"
-                      aria-label="Learn more about TransMedia Watch Media Project"
+                      aria-label="Support my independent advocacy projects"
                     >
                       Learn More
                     </Button>
@@ -161,9 +170,9 @@ function App() {
           <Card.Body className="text-center">
             <h3>Interested in collaborating?</h3>
             <p>
-              Whether you're an organization, developer, or advocate, I'd love
-              to connect and work on meaningful projects together. Feel free to
-              reach out!
+              Let's work together on creating a more equitable, transparent, and
+              privacy-focused future. Whether you're an organization, developer,
+              or advocate, feel free to reach out!
             </p>
             <Button
               variant="info"
