@@ -128,7 +128,7 @@ function App() {
               </Button>{" "}
               <Button
                 variant="info"
-                href="ukpiraty.party"
+                href="https://ukpirate.party/"
                 target="_blank"
                 aria-label="Visit Pirate Party UK website"
               >
