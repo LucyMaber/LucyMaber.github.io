@@ -168,10 +168,10 @@ function App() {
             </p>
             <Button
               variant="info"
-              href="#"
-              aria-label="View Portfolio"
+              href="/Project.html"
+              aria-label="Project"
             >
-              View Portfolio
+              Project
             </Button>
             <Button
               variant="dark"

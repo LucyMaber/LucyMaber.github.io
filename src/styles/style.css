@@ -1,0 +1,27 @@
+.custom-navbar {
+    background-color: #1a1a1a; /* Darker background for contrast */
+    border-bottom: 2px solid #343a40; /* Subtle bottom border */
+  }
+  
+  .custom-navbar .navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem; /* Larger font for visibility */
+    color: #ffffff; /* White color for the brand */
+  }
+  
+  .custom-navbar .nav-link {
+    color: #f8f9fa; /* Light color for links */
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 1.1rem; /* Slightly larger font for links */
+  }
+  
+  .custom-navbar .nav-link:hover {
+    color: #ffd700; /* Gold color on hover */
+    text-decoration: underline; /* Underline effect on hover */
+  }
+  
+  .custom-navbar .navbar-toggler {
+    border-color: #ffffff; /* White border for toggle button */
+  }
+  
