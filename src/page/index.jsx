@@ -41,7 +41,7 @@ function App() {
           </Button>{" "}
           <Button
             variant="success"
-            href="https://www.fiverr.com/your-fiverr-profile"
+            href="https://www.fiverr.com/lucy_ppuk"
             target="_blank"
             aria-label="Hire me on Fiverr"
             className="mt-3"
