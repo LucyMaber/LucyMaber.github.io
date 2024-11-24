@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { createRoot } from 'react-dom/client';
 import BodyPage from "../partials/BodyPage";
 
 const ProjectPage = () => {
@@ -55,21 +56,6 @@ const ProjectPage = () => {
       <div className="container mt-5">
         <section className="mb-5">
           <h2>Projects</h2>
-          <div className="mb-4">
-            <div className="btn-group">
-              {uniqueTags.map((tag, index) => (
-                <button
-                  key={index}
-                  className={`btn btn-outline-primary ${
-                    selectedTag === tag ? "active" : ""
-                  }`}
-                  onClick={() => setSelectedTag(tag)}
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-          </div>
           <div className="row">
             {filteredProjects.map((project, index) => (
               <div className="col-md-4 mb-4" key={index}>
@@ -116,3 +102,4 @@ const ProjectPage = () => {
 };
 
 export default ProjectPage;
+

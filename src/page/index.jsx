@@ -38,7 +38,33 @@ function App() {
             }}
           >
             ❤️ Support My Projects
+          </Button>{" "}
+          <Button
+            variant="success"
+            href="https://www.fiverr.com/your-fiverr-profile"
+            target="_blank"
+            aria-label="Hire me on Fiverr"
+            className="mt-3"
+            style={{
+              marginLeft: "10px",
+              color: "#ffffff",
+              backgroundColor: "#1DBF73",
+              border: "none",
+            }}
+          >
+            💼 Hire Me on Fiverr
           </Button>
+          {/* Disclaimer Section */}
+          <div className="mt-3">
+            <small>
+              <strong>Please Note:</strong> Donations made through this page
+              support my personal projects and living expenses. They are{" "}
+              <strong>not</strong> contributions to the Pirate Party UK, TACC,
+              or any political campaign. To donate to the Pirate Party UK or
+              TACC, or to support a specific candidate in election or just a election effort, please visit
+              their official websites.
+            </small>
+          </div>
         </div>
 
         {/* About Me Section */}
@@ -61,7 +87,9 @@ function App() {
             <Card.Text>
               <ul>
                 <li>Proficient in JavaScript, React, and Python</li>
-                <li>Experienced in web scraping and data processing pipelines</li>
+                <li>
+                  Experienced in web scraping and data processing pipelines
+                </li>
                 <li>
                   Skilled in building NLP models for classification and
                   information extraction
@@ -76,85 +104,63 @@ function App() {
         </Card>
 
         {/* Projects Section */}
-        <Card className="mb-3">
+        <Card className="mb-5">
           <Card.Body>
-            <Card.Title>Projects</Card.Title>
-            <Card.Text>
-              <ul>
-                <li>
-                  <strong>TACC Web Development:</strong> Led the development and
-                  management of the Trans Advocacy and Complaint Collective
-                  website, ensuring accessibility and community engagement.
-                </li>
-                <li>
-                  <strong>Web Scraping Pipelines:</strong> Developed data
-                  collection tools to track trends and insights for advocacy and
-                  research purposes.
-                </li>
-                <li>
-                  <strong>Collaboration of Independent Pirates Website:</strong>{" "}
-                  Managed and maintained the online presence for an
-                  international organization focusing on digital rights and
-                  intellectual property reform.
-                </li>
-              </ul>
-            </Card.Text>
-          </Card.Body>
-        </Card>
-
-        {/* Portfolio Showcase */}
-        <Card className="mb-3">
-          <Card.Body>
-            <Row>
-              <Col md={6}>
-                <Card className="mb-3">
-                  <Card.Img
-                    variant="top"
-                    src="https://via.placeholder.com/300x200"
-                    alt="Project 1 Screenshot"
-                  />
-                  <Card.Body>
-                    <Card.Title>Web Development Projects</Card.Title>
-                    <Card.Text>
-                      Delivering robust web solutions with React, Bootstrap, and
-                      Python-based backends.
-                    </Card.Text>
-                    <Button
-                      variant="secondary"
-                      href="#"
-                      target="_blank"
-                      aria-label="Learn more about web development projects"
-                    >
-                      Learn More
-                    </Button>
-                  </Card.Body>
-                </Card>
-              </Col>
-              <Col md={6}>
-                <Card className="mb-3">
-                  <Card.Img
-                    variant="top"
-                    src="https://via.placeholder.com/300x200"
-                    alt="Project 2 Screenshot"
-                  />
-                  <Card.Body>
-                    <Card.Title>Data Analysis Tools</Card.Title>
-                    <Card.Text>
-                      Built tools for data extraction and analysis to support
-                      informed decision-making.
-                    </Card.Text>
-                    <Button
-                      variant="secondary"
-                      href="#"
-                      target="_blank"
-                      aria-label="Learn more about data analysis tools"
-                    >
-                      Learn More
-                    </Button>
-                  </Card.Body>
-                </Card>
-              </Col>
+            <h2 className="text-center mb-4">Project Showcase</h2>
+            <Row className="g-4">
+              {/* Example project data for mapping */}
+              {[
+                {
+                  id: 1,
+                  title: "Web Development Projects",
+                  description:
+                    "Delivering robust web solutions with React, Bootstrap, and Python-based backends.",
+                  imgSrc: "https://via.placeholder.com/300x200",
+                  link: "#",
+                },
+                {
+                  id: 2,
+                  title: "Data Analysis Tools",
+                  description:
+                    "Built tools for data extraction and analysis to support informed decision-making.",
+                  imgSrc: "https://via.placeholder.com/300x200",
+                  link: "#",
+                },
+              ].map((project) => (
+                <Col md={6} key={project.id}>
+                  <Card className="h-100 shadow-sm project-card">
+                    <Card.Img
+                      variant="top"
+                      src={project.imgSrc}
+                      alt={`${project.title} Screenshot`}
+                      className="project-img"
+                    />
+                    <Card.Body>
+                      <Card.Title>{project.title}</Card.Title>
+                      <Card.Text>{project.description}</Card.Text>
+                      <Button
+                        variant="primary"
+                        href={project.link}
+                        target="_blank"
+                        aria-label={`Learn more about ${project.title}`}
+                      >
+                        Learn More
+                      </Button>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
             </Row>
+            <div className="text-center mt-4">
+              <Button
+                variant="info"
+                href="/Project.html"
+                aria-label="See more projects"
+                size="lg"
+              >
+                See More Projects
+              </Button>
+            </div>
           </Card.Body>
         </Card>
 
@@ -166,11 +172,7 @@ function App() {
               I am always open to new opportunities and collaborations. Let’s
               create impactful solutions together.
             </p>
-            <Button
-              variant="info"
-              href="/Project.html"
-              aria-label="Project"
-            >
+            <Button variant="info" href="/Project.html" aria-label="Project">
               Project
             </Button>
             <Button
@@ -178,6 +180,7 @@ function App() {
               href="https://github.com/LucyMaber"
               target="_blank"
               aria-label="Visit GitHub profile"
+              className="ms-2"
             >
               <Github /> GitHub
             </Button>

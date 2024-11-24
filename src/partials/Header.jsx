@@ -18,7 +18,7 @@ const Header = () => {
           <Nav className="me-auto">
             <Nav.Link href="/" onClick={() => setExpanded(false)}>Home</Nav.Link>
             <Nav.Link href="/Project.html" onClick={() => setExpanded(false)}>Project</Nav.Link>
-            <Nav.Link href="/CVPage.html" onClick={() => setExpanded(false)}>CVPage</Nav.Link>
+            <Nav.Link href="/CVPage.html" onClick={() => setExpanded(false)}>CV </Nav.Link>
           </Nav>
         </div>
       </Container>

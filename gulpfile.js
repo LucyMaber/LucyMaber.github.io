@@ -21,12 +21,14 @@ const requireFromString = require('require-from-string');
 const streamToPromise = require('stream-to-promise');
 const MarkdownIt = require('markdown-it'); // Import markdown-it
 const globalConfig = require('./global_cnfig.json');
+const InlineSourcePlugin = require('inline-source-webpack-plugin');
+const HtmlInlineScriptPlugin = require('html-inline-script-webpack-plugin');
 
 const ARTICLES_PER_PAGE = 10;
 const sitemapList = [];
 
 // Common Webpack configuration
-const commonWebpackConfig = {watch: false,
+const commonWebpackConfig = {
   watch: false,
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   resolve: {
@@ -100,11 +102,6 @@ const clientWebpackConfig = {
     publicPath: '/js/',
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      filename: '../index.html',
-      template: 'src/templates/index.html',
-      inject: 'body',
-    }),
   ],
 };
 
@@ -458,7 +455,7 @@ async function buildContentPages(done) {
   }
 }
 
-// Task to build static pages using server-side rendering (SSR)
+// Task to build static pages using server-side rendering (SSR) with <noscript>
 function buildStaticPagesSSR() {
   return new Promise((resolve, reject) => {
     const pageDir = 'src/page/';
@@ -512,14 +509,54 @@ function buildStaticPagesSSR() {
       try {
         for (const pageName of Object.keys(entryPoints)) {
           const compiledFileName = path.join('temp/pages', `${pageName}.js`);
-          const component = require(path.resolve(__dirname, compiledFileName)).default;
+          const componentModule = require(path.resolve(__dirname, compiledFileName));
 
-          const element = React.createElement(component);
-          const html = ReactDOMServer.renderToStaticMarkup(element);
+          // Support both default and named exports
+          const Component = componentModule.default || componentModule;
 
+          if (!Component || (typeof Component !== 'function' && typeof Component !== 'object')) {
+            throw new Error(`Invalid component export in ${compiledFileName}`);
+          }
+
+          // Optionally, retrieve title from component's static property or props
+          const title = Component.title || pageName;
+
+          // Render the component to static HTML
+          const element = React.createElement(Component);
+          const renderedHtml = ReactDOMServer.renderToStaticMarkup(element);
+
+          // Define the <noscript> warning
+          const noScriptWarning = `
+            <noscript>
+              <div class="noscript-warning">
+                <strong>Warning:</strong> This site requires JavaScript to function correctly. Please enable JavaScript in your browser settings.
+              </div>
+            </noscript>
+          `;
+
+          // Wrap the rendered HTML into a full HTML document with <noscript>
+          const fullHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>${title}</title>
+  <link rel="stylesheet" href="/styles/noscript.css">
+  <!-- Add other meta tags or links here -->
+</head>
+<body>
+  ${renderedHtml}
+  ${noScriptWarning}
+  <script src="/js/${pageName}.bundle.js"></script>
+</body>
+</html>`;
+
+          // Define the output HTML file path
           const htmlFileName = path.join('output', `${pageName}.html`);
-          fs.writeFileSync(htmlFileName, html);
+          fs.writeFileSync(htmlFileName, fullHtml);
+          console.log(`Generated SSR page with <noscript>: ${htmlFileName}`);
 
+          // Optionally, add to sitemap
+          sitemapList.push({ url: `${pageName}.html` });
         }
 
         resolve();
@@ -531,63 +568,13 @@ function buildStaticPagesSSR() {
   });
 }
 
-// Task to build static pages using client-side rendering (CSR)
-function buildStaticPagesCSR() {
-  return new Promise((resolve, reject) => {
-    const filesInClientDir = fs.readdirSync('src/client/');
-    const entryPoints = {};
-
-    filesInClientDir.forEach((file) => {
-      const ext = path.extname(file);
-      if (ext === '.jsx') {
-        const fileName = path.basename(file, ext);
-        entryPoints[fileName] = path.resolve(__dirname, 'src/client', file);
-      }
-    });
-
-    if (Object.keys(entryPoints).length === 0) {
-      console.warn('No entry points found for CSR.');
-      resolve();
-      return;
-    }
-
-    const webpackConfig = {
-      ...clientWebpackConfig,
-      entry: entryPoints,
-      output: {
-        filename: '[name].bundle.js',
-      },
-      plugins: [
-        ...clientWebpackConfig.plugins,
-        ...Object.keys(entryPoints).map(
-          (entryName) =>
-            new HtmlWebpackPlugin({
-              filename: `../${entryName}.html`,
-              template: 'src/templates/index.html',
-              chunks: [entryName],
-              inject: 'body',
-            })
-        ),
-      ],
-    };
-
-    webpack(webpackConfig, (err, stats) => {
-      if (err) {
-        console.error("Webpack CSR compilation error:", err);
-        reject(err);
-        return;
-      }
-
-      if (stats.hasErrors()) {
-        const info = stats.toJson();
-        console.error("Webpack CSR compilation errors:", info.errors);
-        reject(new Error('Webpack compilation errors'));
-        return;
-      }
-      console.log("Webpack CSR compilation completed.");
-      resolve();
-    });
-  });
+// Task to copy and minify CSS styles
+function copyStyles() {
+  return gulp
+    .src('src/styles/**/*.css')
+    .pipe(purgecss({ content: ['output/**/*.html'] }))
+    .pipe(cleanCSS())
+    .pipe(gulp.dest('output/styles'));
 }
 
 // Task to copy and minify CSS styles
@@ -666,6 +653,66 @@ async function copyData() {
   }
 }
 
+
+// Updated buildStaticPagesCSR using webpack-stream
+function buildStaticPagesCSR() {
+  // Define the path to your CSR entry points
+  const clientEntryDir = path.resolve(__dirname, 'src/client'); // Adjust if necessary
+  const outputDir = path.resolve(__dirname, 'output/js');
+
+  // Find all .jsx files in the clientEntryDir
+  const entryFiles = glob.sync('**/*.jsx', { cwd: clientEntryDir });
+
+  if (entryFiles.length === 0) {
+    console.warn('No CSR entry points found.');
+    return Promise.resolve();
+  }
+
+  // Create entry points object
+  const entryPoints = entryFiles.reduce((entries, file) => {
+    const name = path.basename(file, '.jsx');
+    entries[name] = path.join(clientEntryDir, file);
+    return entries;
+  }, {});
+
+  // Update the clientWebpackConfig with dynamic entries
+  const dynamicClientWebpackConfig = {
+    ...clientWebpackConfig,
+    entry: entryPoints,
+    output: {
+      ...clientWebpackConfig.output,
+      filename: '[name].bundle.js',
+      path: outputDir,
+      publicPath: '/js/',
+    },
+    mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+    plugins: [
+      // Add HtmlWebpackPlugin instances for each entry point
+      ...Object.keys(entryPoints).map(
+        (entryName) =>
+          new HtmlWebpackPlugin({
+            template: path.join(clientEntryDir, `${entryName}.html`), // Ensure corresponding HTML templates exist
+            filename: `${entryName}.html`,
+            chunks: [entryName],
+          })
+      ),
+      // Add more plugins as required
+    ],
+  };
+
+  // Return a merged stream of all entry points
+  const tasks = Object.keys(entryPoints).map((entryName) => {
+    return gulp
+      .src(path.join(clientEntryDir, `${entryName}.jsx`))
+      .pipe(plumber({ errorHandler: handleError }))
+      .pipe(webpackStream(dynamicClientWebpackConfig, webpack))
+      .pipe(gulp.dest(outputDir));
+  });
+
+  return merge(...tasks);
+}
+
+
 // Main build task sequence
 const build = gulp.series(
   clean,
@@ -675,7 +722,7 @@ const build = gulp.series(
   compileContentFromMarkdown,
   copyData,
   buildStaticPagesSSR, // Server-side rendering
-  // buildStaticPagesCSR, // Client-side rendering
+  buildStaticPagesCSR,
   copyStyles,
   copyStylesJs,
   // autoInline,
